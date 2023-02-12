@@ -104,15 +104,24 @@ const VideoController: React.FC<VideoControllerProps> = ({
             ref={webcamRef}
             onUserMediaError={onUserMediaError}
           />
+          {processing ? (
+            <div className="text-sm text-white">Processing Video</div>
+          ) : (
+            ""
+          )}
           <canvas ref={canvasRef} className="hidden" />
           <video ref={videoRef} className="hidden" autoPlay muted />
           <div className="flex flex-nowrap justify-center align-middle items-center">
-            <button
-              onClick={onCameraToggle}
-              className="text-xs bg-blue-800 text-white p-2 m-1"
-            >
-              Toggle Camera
-            </button>
+            {!capturing && !processing ? (
+              <button
+                onClick={onCameraToggle}
+                className="text-xs bg-blue-800 text-white p-2 m-1"
+              >
+                Toggle Camera
+              </button>
+            ) : (
+              ""
+            )}
             {capturing ? (
               <button
                 onClick={handleStopCaptureClick}
@@ -122,12 +131,16 @@ const VideoController: React.FC<VideoControllerProps> = ({
               </button>
             ) : (
               <>
-                <button
-                  onClick={handleStartCaptureClick}
-                  className="text-xs bg-blue-800 text-white p-2 m-1"
-                >
-                  Record Video
-                </button>
+                {!processing ? (
+                  <button
+                    onClick={handleStartCaptureClick}
+                    className="text-xs bg-blue-800 text-white p-2 m-1"
+                  >
+                    Record Video
+                  </button>
+                ) : (
+                  ""
+                )}
               </>
             )}
           </div>
