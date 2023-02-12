@@ -16,7 +16,7 @@ const VideoController: React.FC<VideoControllerProps> = ({
     height: 720,
     facingMode: "user",
   });
-  const webcamRef = useRef(null);
+  const webcamRef = useRef<any>(null);
   const mediaRecorderRef = useRef<any>(null);
   const [processing, setProcessing] = useState(false);
   const [capturing, setCapturing] = useState(false);
@@ -49,7 +49,7 @@ const VideoController: React.FC<VideoControllerProps> = ({
   }, [webcamRef, setCapturing, mediaRecorderRef]);
 
   const handleDataAvailable = useCallback(
-    ({ data }) => {
+    ({ data }: { data: any }) => {
       if (data.size > 0) {
         setRecordedChunks((prev) => prev.concat(data));
       }
