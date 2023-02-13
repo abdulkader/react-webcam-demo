@@ -91,8 +91,8 @@ const VideoController: React.FC<VideoControllerProps> = ({
   }, [recordedChunks, processing]);
 
   return (
-    <div className="fixed w-screen h-screen top-0 left-0 flex flex-col justify-start bg-black z-100">
-      <div className="md:max-w-[700px] mx-auto block w-full h-full">
+    <div className="fixed w-screen h-screen top-0 left-0 flex flex-col justify-start bg-black z-100 overflow-auto pb-28">
+      <div className="md:max-w-[700px] mx-auto block w-full h-full pb-28">
         <div className="p-4">
           <Webcam
             audio={true}
