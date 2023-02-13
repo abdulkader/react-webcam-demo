@@ -46,7 +46,7 @@ const VideoController: React.FC<VideoControllerProps> = ({
       handleDataAvailable
     );
     mediaRecorderRef.current.start();
-  }, [webcamRef, setCapturing, mediaRecorderRef]);
+  }, [webcamRef, mediaRecorderRef]);
 
   const handleDataAvailable = useCallback(
     ({ data }: { data: any }) => {
