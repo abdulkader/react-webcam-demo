@@ -20,7 +20,12 @@ const VideoController: React.FC<VideoControllerProps> = ({
   const mediaRecorderRef = useRef<any>(null);
   const [processing, setProcessing] = useState(false);
   const [capturing, setCapturing] = useState(false);
+  const [readyToRecord, setReadyToRecord] = useState(false);
   const [recordedChunks, setRecordedChunks] = useState([]);
+
+  const onUserMedia = () => {
+    setReadyToRecord(true);
+  };
 
   const onCameraToggle = () => {
     if (videoConstraints?.facingMode === "user") {
@@ -103,6 +108,7 @@ const VideoController: React.FC<VideoControllerProps> = ({
             className="w-full h-auto block"
             ref={webcamRef}
             onUserMediaError={onUserMediaError}
+            onUserMedia={onUserMedia}
           />
           {processing ? (
             <div className="text-sm text-white">Processing Video</div>
@@ -131,7 +137,7 @@ const VideoController: React.FC<VideoControllerProps> = ({
               </button>
             ) : (
               <>
-                {!processing ? (
+                {!processing && readyToRecord ? (
                   <button
                     onClick={handleStartCaptureClick}
                     className="text-xs bg-blue-800 text-white p-2 m-1"
